@@ -16,8 +16,8 @@ struct WaitingRequest
 
 /*
  * WaitingList
- * FIFO waiting list for ONE resource, built on std::queue.
- * the first student to join is the first student served.
+ * FIFO waiting list for ONE resource
+ * the first student to join is the first student served
  * each resource owns one
  * when a resource becomes available, call dequeue() to get the next student and create a reservation for them
  */
