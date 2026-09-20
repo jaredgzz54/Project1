@@ -3,10 +3,13 @@
 
 #include <iostream>
 #include <stack>
+#include <string>
+#include <vector>
 
 using namespace std;
 
 struct CancelationNode {
+	string studentName;
 
 };
 
@@ -17,7 +20,14 @@ struct CancelationNode {
 		CancelationHistory.pop();	// Removes top element of stack
 		CancelationHistory.empty(); // Checks if stack is empty (If empty will output 0
 */
-stack<CancelationNode> CancelationHistory;
+class CanelationHistoryClass {
+	private:
+		stack<CancelationNode> CancelationHistory;
+
+	public:
+		void DisplayCancelationHistory(); // Cannot be declared as const because what we plan to do with stack
+};
+
 
 
 
