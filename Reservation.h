@@ -10,38 +10,30 @@ using namespace std;
 
 //Global Variables
 const int SIZE = 8;
-enump options {ViewR = 1, CreateR = 2, CancelR = 3, ViewW = 4, UndoC = 5, SearchR = 6, SortR = 7, GenerateRepo = 8, Exit = 9};
+enum options { ViewR = 1, CreateR = 2, CancelR = 3, ViewW = 4, UndoC = 5, SearchR = 6, SortR = 7, GenerateRepo = 8, Exit = 9 };
 
 struct Node
 {
-    xx data;
+    int data;
     Node* next;
     Node* prev;
-}
+};
 
 class DoublyLinkedList
 {
+private:
 
-        private:
+    Node* head;
+    Node* tail;
 
-        Node* head;
-        Node* tail;
+public:
+    DoublyLinkedList();
+    ~DoublyLinkedList();
 
-        public:
-        //xx is a place holder to be the name for list that will be added later in the main
-        DoublyLinkedList();
-        ~DoublyLinkedList();
-        //void clear(); can't remember if we need to delete item to free memory
-        DLLPreppend(xx,item);
-        DLLPreppendNode(xx, newNode);
-        DLLRemove(xx,itemToRemove);
-        DLLSearch(xx,itemtosearch);
-
-
-}
-
-
-
-
+    void DLLPreppend(DoublyLinkedList* list, int item);
+    void DLLPreppendNode(DoublyLinkedList* list, Node* newNode);
+    void DLLRemove(DoublyLinkedList* list, Node* itemToRemove);
+    Node* DLLSearch(DoublyLinkedList* list, int itemToSearch);
+};
 
 #endif

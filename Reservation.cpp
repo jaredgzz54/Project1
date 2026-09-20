@@ -2,72 +2,100 @@
 
 DoublyLinkedList::DoublyLinkedList()
 {
-
+    head = nullptr;
+    tail = nullptr;
 }
 
-//allocates new node with items as the data for the node
-DoublyLinkedList::DLLPreppend(xx, item)
+DoublyLinkedList::~DoublyLinkedList()
 {
-    Node newNode = item;
-    DLLPreppendNode(xx, newNode)
-}
+    Node* currentNode = head;
 
-DoublyLinkedList::DLLPreppendNode(xx, newNode)
-{
-    if(xx->head == null)
+    while (currentNode != nullptr)
     {
-        xx->head = newNode;
-        xx->tail = newNode;
+        Node* nextNode = currentNode->next;
+        delete currentNode;
+        currentNode = nextNode;
+    }
+
+    head = nullptr;
+    tail = nullptr;
+}
+
+//allocates new node with item as the data for the node
+void DoublyLinkedList::DLLPreppend(DoublyLinkedList* list, int item)
+{
+    Node* newNode = new Node;
+    newNode->data = item;
+    newNode->next = nullptr;
+    newNode->prev = nullptr;
+
+    DLLPreppendNode(list, newNode);
+}
+
+void DoublyLinkedList::DLLPreppendNode(DoublyLinkedList* list, Node* newNode)
+{
+    if (list->head == nullptr)
+    {
+        list->head = newNode;
+        list->tail = newNode;
     }
     else
     {
-        list->tail->next = newNode;
-        newNode->prev = list->tail;
-        list->tail = newNode;
+        newNode->next = list->head;
+        newNode->prev = nullptr;
+        list->head->prev = newNode;
+        list->head = newNode;
     }
 }
-//xy is the name of the class for resources and the data type of itemtosearch
-xy DoublyLinkedList::DLLSearch(xx, itemtosearch)
+
+//Searches for a node containing itemToSearch
+Node* DoublyLinkedList::DLLSearch(DoublyLinkedList* list, int itemToSearch)
 {
-    currentNode = list->head;
-    while(currentNode != null)
+    Node* currentNode = list->head;
+
+    while (currentNode != nullptr)
     {
-        if(currentNode->head == itemtosearch)
+        if (currentNode->data == itemToSearch)
         {
-            return itemtosearch;
+            return currentNode;
         }
-        currentNode = currentNode->next
+
+        currentNode = currentNode->next;
     }
 
-    return null;
+    return nullptr;
 }
 
-DoublyLinkedList::DLLRemove(xx, itemToRemove)
-{   
-    if(DLLSearch(xx, itemToRemove) == null){
+void DoublyLinkedList::DLLRemove(DoublyLinkedList* list, Node* itemToRemove)
+{
+    if (itemToRemove == nullptr)
+    {
         cout << "Item not found" << endl;
-        break;
-    }
-    successor = itemToRemove->next;
-    predecessor = itemToRemove->prev;
-
-    if(successor != null)
-    {
-        successor->prev = predecessor
+        return;
     }
 
-    if(predecessor != null)
+    Node* successor = itemToRemove->next;
+    Node* predecessor = itemToRemove->prev;
+
+    if (successor != nullptr)
     {
-        predecessor->next = successor
+        successor->prev = predecessor;
     }
 
-    if(currentNode == xx->head)
+    if (predecessor != nullptr)
     {
-        xx->head = successor
+        predecessor->next = successor;
     }
 
-    if(currentNode == xx->tail)
+    if (itemToRemove == list->head)
     {
-        xx->tail == predecessor
+        list->head = successor;
     }
+
+    if (itemToRemove == list->tail)
+    {
+        list->tail = predecessor;
+    }
+
+    delete itemToRemove;
 }
