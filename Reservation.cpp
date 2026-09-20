@@ -6,13 +6,13 @@ DoublyLinkedList::DoublyLinkedList()
 }
 
 //allocates new node with items as the data for the node
-DoublyLinkedList::DLLPreppend(xx, item)
+void DoublyLinkedList::DLLPreppend(xx, item)
 {
     Node newNode = item;
     DLLPreppendNode(xx, newNode)
 }
 
-DoublyLinkedList::DLLPreppendNode(xx, newNode)
+void DoublyLinkedList::DLLPreppendNode(xx, newNode)
 {
     if(xx->head == null)
     {
@@ -27,7 +27,7 @@ DoublyLinkedList::DLLPreppendNode(xx, newNode)
     }
 }
 //xy is the name of the class for resources and the data type of itemtosearch
-xy DoublyLinkedList::DLLSearch(xx, itemtosearch)
+Resource DoublyLinkedList::DLLSearch(xx, itemtosearch)
 {
     currentNode = list->head;
     while(currentNode != null)

@@ -1,6 +1,7 @@
 #ifndef RESERVATION_H
 #define RESERVATION_H
 
+#include "Resource.h"
 #include <iostream>
 #include <fstream>
 #include <queue>
@@ -14,7 +15,7 @@ enump options {ViewR = 1, CreateR = 2, CancelR = 3, ViewW = 4, UndoC = 5, Search
 
 struct Node
 {
-    xx data;
+    Resource data;
     Node* next;
     Node* prev;
 }
@@ -32,10 +33,10 @@ class DoublyLinkedList
         DoublyLinkedList();
         ~DoublyLinkedList();
         //void clear(); can't remember if we need to delete item to free memory
-        DLLPreppend(xx,item);
-        DLLPreppendNode(xx, newNode);
+        void DLLPreppend(xx,item);
+        void DLLPreppendNode(xx, newNode);
         DLLRemove(xx,itemToRemove);
-        DLLSearch(xx,itemtosearch);
+        Resource DLLSearch(xx,itemtosearch);
 
 
 }
