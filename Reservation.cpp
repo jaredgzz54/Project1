@@ -48,8 +48,19 @@ DoublyLinkedList::DLLRemove(xx, itemToRemove)
         cout << "Item not found" << endl;
         break;
     }
-    successor = itemToRemove->next;
-    predecessor = itemToRemove->prev;
+    
+
+    currentNode = list->head;
+    while(currentNode != null)
+    {
+        if(currentNode->head == itemToRemove)
+        {
+            successor = currentNode->next;
+            predecessor = currentNode->prev;
+        }
+        currentNode = currentNode->next
+    }
+
 
     if(successor != null)
     {
