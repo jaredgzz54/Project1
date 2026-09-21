@@ -3,3 +3,4 @@
      Lastly, we need to load previous info of people that already reserved items using fstream. Other items are needed, but aren't code. One is Big-O notation for the complexity. Please be respectful and use meaningful comments to talk with each other and explain why you are writing code the way you are. Keep it brief. Let's work on this together and do the best we can. 
 
 I am working on the resource management files.
+Waiting List Management - Jacob S

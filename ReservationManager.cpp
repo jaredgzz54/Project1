@@ -29,3 +29,4 @@ public:
 };
 
 #endif
+#include "ReservationManager.h"
