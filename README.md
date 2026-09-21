@@ -2,4 +2,5 @@
      When canceling reservations, the order of the canceled items must be stored in a stack so we can undo if it was a *mistake*. In the reservation system, if items are being reserved by multiple people, it must use a queue to keep track of how many people are in front of you.
      Lastly, we need to load previous info of people that already reserved items using fstream. Other items are needed, but aren't code. One is Big-O notation for the complexity. Please be respectful and use meaningful comments to talk with each other and explain why you are writing code the way you are. Keep it brief. Let's work on this together and do the best we can. 
 
+I am working on the resource management files.
 Waiting List Management - Jacob S

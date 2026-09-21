@@ -2,43 +2,37 @@
 #define RESERVATION_H
 
 #include "Resource.h"
+#include <iostream>
+#include <string>
 
+struct ReservationRecord {
+    std::string reservationId;
+    std::string studentId;
+    std::string studentName;
+    std::string resourceId;
+    std::string reservationDate;
+};
 
-
-//Global Variables
-const int SIZE = 8;
-enump options {ViewR = 1, CreateR = 2, CancelR = 3, ViewW = 4, UndoC = 5, SearchR = 6, SortR = 7, GenerateRepo = 8, Exit = 9};
-
-struct Node
-{
-    Resource data;
+struct Node {
+    ReservationRecord data;
     Node* next;
     Node* prev;
-}
+};
 
-class DoublyLinkedList
-{
+class DoublyLinkedList {
+private:
+    Node* head;
+    Node* tail;
 
-        private:
+public:
+    DoublyLinkedList();
+    ~DoublyLinkedList();
 
-        Node* head;
-        Node* tail;
-
-        public:
-        //xx is a place holder to be the name for list that will be added later in the main
-        DoublyLinkedList();
-        ~DoublyLinkedList();
-        //void clear(); can't remember if we need to delete item to free memory
-        void DLLPreppend(xx,item);
-        void DLLPreppendNode(xx, newNode);
-        DLLRemove(xx,itemToRemove);
-        Resource DLLSearch(xx,itemtosearch);
-
-
-}
-
-
-
-
+    void insert(const ReservationRecord& record);
+    bool remove(const std::string& reservationId, ReservationRecord& removedRecord);
+    Node* search(const std::string& reservationId) const;
+    void display() const;
+    bool isEmpty() const;
+};
 
 #endif

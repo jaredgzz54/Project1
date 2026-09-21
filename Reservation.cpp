@@ -1,8 +1,14 @@
 #include "Reservation.h"
 
-DoublyLinkedList::DoublyLinkedList()
-{
+DoublyLinkedList::DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
+DoublyLinkedList::~DoublyLinkedList() {
+    Node* current = head;
+    while (current != nullptr) {
+        Node* nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
 }
 
 //allocates new node with items as the data for the node
@@ -39,46 +45,48 @@ Resource DoublyLinkedList::DLLSearch(xx, itemtosearch)
         currentNode = currentNode->next
     }
 
-    return null;
+    removedRecord = current->data;
+
+    if (current == head && current == tail) {
+        head = tail = nullptr;
+    } else if (current == head) {
+        head = head->next;
+        head->prev = nullptr;
+    } else if (current == tail) {
+        tail = tail->prev;
+        tail->next = nullptr;
+    } else {
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
+    }
+
+    delete current;
+    return true;
 }
 
-DoublyLinkedList::DLLRemove(xx, itemToRemove)
-{   
-    if(DLLSearch(xx, itemToRemove) == null){
-        std :: cout << "Item not found" << endl;
-        break;
-    }
-    
-
-    currentNode = list->head;
-    while(currentNode != null)
-    {
-        if(currentNode->head == itemToRemove)
-        {
-            successor = currentNode->next;
-            predecessor = currentNode->prev;
+Node* DoublyLinkedList::search(const std::string& reservationId) const {
+    Node* current = head;
+    while (current != nullptr) {
+        if (current->data.reservationId == reservationId) {
+            return current;
         }
-        currentNode = currentNode->next
+        current = current->next;
     }
+    return nullptr;
+}
 
-
-    if(successor != null)
-    {
-        successor->prev = predecessor
+void DoublyLinkedList::display() const {
+    if (isEmpty()) {
+        std::cout << "No active reservations.\n";
+        return;
     }
-
-    if(predecessor != null)
-    {
-        predecessor->next = successor
-    }
-
-    if(currentNode == xx->head)
-    {
-        xx->head = successor
-    }
-
-    if(currentNode == xx->tail)
-    {
-        xx->tail == predecessor
+    Node* current = head;
+    while (current != nullptr) {
+        std::cout << "Reservation ID: " << current->data.reservationId 
+                  << " | Student: " << current->data.studentName 
+                  << " (ID: " << current->data.studentId << ")"
+                  << " | Resource ID: " << current->data.resourceId 
+                  << " | Date: " << current->data.reservationDate << "\n";
+        current = current->next;
     }
 }
