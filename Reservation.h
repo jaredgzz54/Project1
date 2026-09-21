@@ -2,13 +2,8 @@
 #define RESERVATION_H
 
 #include "Resource.h"
-#include <iostream>
-#include <fstream>
-#include <queue>
-#include <stack>
-#include <vector>
 
-using namespace std;
+
 
 //Global Variables
 const int SIZE = 8;

@@ -45,7 +45,7 @@ Resource DoublyLinkedList::DLLSearch(xx, itemtosearch)
 DoublyLinkedList::DLLRemove(xx, itemToRemove)
 {   
     if(DLLSearch(xx, itemToRemove) == null){
-        cout << "Item not found" << endl;
+        std :: cout << "Item not found" << endl;
         break;
     }
     
