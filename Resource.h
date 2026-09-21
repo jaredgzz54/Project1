@@ -4,6 +4,9 @@
 #include <iostream>
 #include <queue>
 #include <string>
+#include <fstream>
+#include <stack>
+#include <vector>
 
 struct WaitingRequest {
     std::string studentId;

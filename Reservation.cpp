@@ -11,25 +11,38 @@ DoublyLinkedList::~DoublyLinkedList() {
     }
 }
 
-bool DoublyLinkedList::isEmpty() const {
-    return head == nullptr;
+//allocates new node with items as the data for the node
+void DoublyLinkedList::DLLPreppend(xx, item)
+{
+    Node newNode = item;
+    DLLPreppendNode(xx, newNode)
 }
 
-void DoublyLinkedList::insert(const ReservationRecord& record) {
-    Node* newNode = new Node{record, nullptr, nullptr};
-    if (head == nullptr) {
-        head = tail = newNode;
-    } else {
-        tail->next = newNode;
-        newNode->prev = tail;
-        tail = newNode;
+void DoublyLinkedList::DLLPreppendNode(xx, newNode)
+{
+    if(xx->head == null)
+    {
+        xx->head = newNode;
+        xx->tail = newNode;
+    }
+    else
+    {
+        list->tail->next = newNode;
+        newNode->prev = list->tail;
+        list->tail = newNode;
     }
 }
-
-bool DoublyLinkedList::remove(const std::string& reservationId, ReservationRecord& removedRecord) {
-    Node* current = search(reservationId);
-    if (current == nullptr) {
-        return false;
+//xy is the name of the class for resources and the data type of itemtosearch
+Resource DoublyLinkedList::DLLSearch(xx, itemtosearch)
+{
+    currentNode = list->head;
+    while(currentNode != null)
+    {
+        if(currentNode->head == itemtosearch)
+        {
+            return itemtosearch;
+        }
+        currentNode = currentNode->next
     }
 
     removedRecord = current->data;
