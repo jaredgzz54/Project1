@@ -1,135 +1,105 @@
 #include "Resource.h"
 
-using namespace std;
+// WaitingList Implementation
+WaitingList::WaitingList(const std::string& resourceID) : resourceId(resourceID) {}
 
-// ===================== Waiting List (Milestone 1) =====================
-
-WaitingList::WaitingList(const string& resourceID)
-    : resourceID(resourceID)
-{
-}
-
-// O(n) complexity
-bool WaitingList::enqueue(const WaitingRequest& request)
-{
-    if (contains(request.studentID))
-    {
-        cout << "Student " << request.studentID
-             << " is already on the waiting list for " << resourceID << "." << endl;
-        return false;
+bool WaitingList::enqueue(const WaitingRequest& request) {
+    if (contains(request.studentId)) {
+        return false; // Student already in waiting list
     }
-
     requests.push(request);
     return true;
 }
 
-// O(1)
-bool WaitingList::dequeue(WaitingRequest& next)
-{
-    if (requests.empty())
-    {
-        cout << "The waiting list for " << resourceID << " is empty." << endl;
+bool WaitingList::dequeue(WaitingRequest& next) {
+    if (requests.empty()) {
         return false;
     }
-
     next = requests.front();
     requests.pop();
     return true;
 }
 
-// O(n)
-bool WaitingList::removeStudent(const string& studentID)
-{
+bool WaitingList::removeStudent(const std::string& studentID) {
+    std::queue<WaitingRequest> tempQueue;
     bool found = false;
-    int count = static_cast<int>(requests.size());
 
-    for (int i = 0; i < count; i++)
-    {
-        WaitingRequest current = requests.front();
+    while (!requests.empty()) {
+        WaitingRequest req = requests.front();
         requests.pop();
-
-        if (!found && current.studentID == studentID)
-        {
-            found = true;            // drop this one
-        }
-        else
-        {
-            requests.push(current);  // keep everyone else in order
+        if (req.studentId == studentID) {
+            found = true;
+        } else {
+            tempQueue.push(req);
         }
     }
-
-    if (!found)
-    {
-        cout << "Student " << studentID << " was not found on the waiting list for "
-             << resourceID << "." << endl;
-    }
+    requests = tempQueue;
     return found;
 }
 
-// O(1)
-bool WaitingList::peek(WaitingRequest& front) const
-{
-    if (requests.empty())
-    {
+bool WaitingList::peek(WaitingRequest& front) const {
+    if (requests.empty()) {
         return false;
     }
     front = requests.front();
     return true;
 }
 
-// O(n) works on a copy so the real queue isnt bothered
-bool WaitingList::contains(const string& studentID) const
-{
-    queue<WaitingRequest> copy = requests;
-
-    while (!copy.empty())
-    {
-        if (copy.front().studentID == studentID)
-        {
+bool WaitingList::contains(const std::string& studentID) const {
+    std::queue<WaitingRequest> tempQueue = requests;
+    while (!tempQueue.empty()) {
+        if (tempQueue.front().studentId == studentID) {
             return true;
         }
-        copy.pop();
+        tempQueue.pop();
     }
     return false;
 }
 
-bool WaitingList::isEmpty() const
-{
+bool WaitingList::isEmpty() const {
     return requests.empty();
 }
 
-int WaitingList::size() const
-{
+int WaitingList::size() const {
     return static_cast<int>(requests.size());
 }
 
-const string& WaitingList::getResourceID() const
-{
-    return resourceID;
+std::string WaitingList::getResourceId() const {
+    return resourceId;
 }
 
-// O(n)
-void WaitingList::display() const
-{
-    cout << "--- Waiting List for Resource " << resourceID << " ---" << endl;
-
-    if (requests.empty())
-    {
-        cout << "No students are currently waiting." << endl;
+void WaitingList::display() const {
+    if (requests.empty()) {
+        std::cout << "Waiting list is empty.\n";
         return;
     }
-
-    queue<WaitingRequest> copy = requests;
-    int position = 1;
-
-    while (!copy.empty())
-    {
-        const WaitingRequest& r = copy.front();
-        cout << position << ". " << r.studentName
-             << " (Student ID: " << r.studentID << ")" << endl;
-        copy.pop();
-        position++;
+    std::queue<WaitingRequest> tempQueue = requests;
+    int pos = 1;
+    while (!tempQueue.empty()) {
+        WaitingRequest req = tempQueue.front();
+        tempQueue.pop();
+        std::cout << pos << ". Student ID: " << req.studentId 
+                  << ", Name: " << req.studentName << "\n";
+        pos++;
     }
 }
 
-// ===================== Resource class implementation goes below =====================
+// Resource Implementation
+Resource::Resource() : resourceId(""), resourceName(""), resourceType(""), isAvailable(true) {}
+
+Resource::Resource(std::string id, std::string name, std::string type, bool available)
+    : resourceId(id), resourceName(name), resourceType(type), isAvailable(available) {}
+
+std::string Resource::getResourceId() const { return resourceId; }
+std::string Resource::getResourceName() const { return resourceName; }
+std::string Resource::getResourceType() const { return resourceType; }
+bool Resource::getAvailability() const { return isAvailable; }
+
+void Resource::setAvailability(bool available) { isAvailable = available; }
+
+void Resource::display() const {
+    std::cout << "ID: " << resourceId 
+              << " | Name: " << resourceName 
+              << " | Type: " << resourceType 
+              << " | Status: " << (isAvailable ? "Available" : "Unavailable") << "\n";
+}
