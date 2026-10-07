@@ -4,3 +4,14 @@
 
 I am working on the resource management files.
 Waiting List Management - Jacob S
+
+
+# Campus Resource Reservation System - Final Release (Milestone 2)
+
+## Overview
+Comprehensive campus resource management application featuring custom data structures (Doubly Linked List, Queue, Stack), hand-written sorting and searching algorithms (Merge Sort & Binary Search), system reporting, robust error handling, and file persistence.
+
+## Compilation & Execution on UNT CSE CELL Machines
+```bash
+g++ -std=c++11 Main.cpp Resource.cpp Reservation.cpp -o reservation_system
+./reservation_system
