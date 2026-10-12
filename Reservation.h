@@ -5,43 +5,68 @@
 #include <fstream>
 #include <queue>
 #include <stack>
+#include <string>
 
 using namespace std;
 
-//Global Variables
-const int SIZE = 8;
-enump options {ViewR = 1, CreateR = 2, CancelR = 3, ViewW = 4, UndoC = 5, SearchR = 6, SortR = 7, GenerateRepo = 8, Exit = 9};
+struct ReservationRecord {
+    string reservationId;
+    string studentId;
+    string studentName;
+    string resourceId;
+    string reservationDate;
+};
 
-struct Node
-{
-    xx data;
+// Prints one reservation on a single line
+void displayReservationRecord(const ReservationRecord& record);
+
+struct Node {
+    ReservationRecord data;
     Node* next;
     Node* prev;
-}
+};
 
-class DoublyLinkedList
-{
+class DoublyLinkedList {
+private:
+    Node* head;
+    Node* tail;
 
-        private:
+public:
+    DoublyLinkedList();
+    ~DoublyLinkedList();
 
-        Node* head;
-        Node* tail;
+    void insert(const ReservationRecord& record);
+    bool remove(const string& reservationId, ReservationRecord& removedRecord);
+    Node* search(const string& reservationId) const;
+    void display() const;
+    bool isEmpty() const;
+    int size() const;                                             
+    int countByResource(const std::string& resourceId) const;   
+    int displayByStudent(const std::string& studentId) const;    
+};
 
-        public:
-        //xx is a place holder to be the name for list that will be added later in the main
-        DoublyLinkedList();
-        ~DoublyLinkedList();
-        //void clear(); can't remember if we need to delete item to free memory
-        DLLPreppend(xx,item);
-        DLLPreppendNode(xx, newNode);
-        DLLRemove(xx,itemToRemove);
-        DLLSearch(xx,itemtosearch);
+// Cancelation code \\
+// Structure for a cancelation node
+struct CancelationNode {
+    ReservationRecord data; // Holds the full reservation that was cancelled
 
+};
 
-}
+/*
+    Stack Functions (Context is CancelationHistory)
+        CancelationHistory.top();	// Access first element (Can be used as a read or write)
+        CancelationHistory.push();	// Add element to top of stack (Requires data)
+        CancelationHistory.pop();	// Removes top element of stack
+        CancelationHistory.empty(); // Checks if stack is empty (If empty will output 0
+*/
+class CancelationHistoryClass {
+private:
+    stack<CancelationNode> CancelationHistory;
 
-
-
-
-
+public:
+    void DisplayCancelationHistory(); // Cannot be declared as const because what we plan to do with stack
+    void AddCancelation(const ReservationRecord& record); // Pushes a cancelled reservation on top
+    ReservationRecord RemoveLastCancelation();             // Pops the most recent one (check IsEmpty first)
+    bool IsEmpty() const;
+};
 #endif
